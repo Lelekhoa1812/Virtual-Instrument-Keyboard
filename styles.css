@@ -1,0 +1,244 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(270deg, rgb(44, 13, 58), rgb(13, 58, 56));
+    color: rgb(58, 18, 13);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    top: 40%; 
+    left: 40%; 
+    font-size: 40px; 
+    font-family: Arial, Helvetica, sans-serif; 
+    background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44); 
+    -webkit-text-fill-color: transparent; 
+    -webkit-background-clip: text; 
+}
+
+p {
+    margin-top: 0;
+    color: rgb(201, 226, 246);
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+select {
+    padding: 8px 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin: 0 10px;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Desktop Keyboard Container */
+#keyboard {
+    position: relative;
+    width: 1015px;
+    height: 320px;
+    background: rgb(3, 12, 50);
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Piano Key Base Style Using Flexbox */
+.piano-key {
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    transition: transform 0.1s, box-shadow 0.1s;
+    /* Flexbox centering for both white and black keys */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Desktop Key Styles */
+.piano-key.white {
+    display: inline-flex;  /* Use inline-flex to preserve inline layout */
+    width: 80px;
+    height: 300px;
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #bbb;
+    border-radius: 0 0 5px 5px;
+    box-sizing: border-box;
+    z-index: 1;
+    /* Remove line-height because flex handles centering */
+}
+
+.piano-key.black {
+    display: flex;  /* Use flex for absolutely positioned keys */
+    width: 40px;
+    height: 200px;
+    background-color: #252525;
+    color: #fff;
+    border: 1px solid #111;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+}
+
+/* Positioning for Black Keys (Desktop) */
+.piano-key[data-key="w"] { left: 60px; }
+.piano-key[data-key="e"] { left: 145px; }
+.piano-key[data-key="t"] { left: 315px; }
+.piano-key[data-key="y"] { left: 400px; }
+.piano-key[data-key="u"] { left: 485px; }
+.piano-key[data-key="o"] { left: 655px; }
+.piano-key[data-key="p"] { left: 740px; }
+.piano-key[data-key="]"] { left: 910px; }
+
+/* Active State */
+.piano-key:active, .piano-key.active {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+/* Responsive Styles for Tablet Devices */
+@media (max-width: 1100px) {
+    /* Make the keyboard fill available width while preserving aspect ratio */
+    #keyboard {
+        width: 100%;
+        max-height: 320px;
+        max-width: 780px;
+        position: relative;
+    }
+    /* White keys – use flex centering; aspect ratio maintained via padding-bottom */
+    .piano-key.white {
+        display: inline-flex;
+        width: calc(100% / 12.99);
+        padding-bottom: calc((100% / 13) * 3.75);
+        vertical-align: top;
+        position: relative;
+    }
+    /* Black keys – size relative to a white key */
+    .piano-key.black {
+        display: flex;
+        width: calc((100% / 13) * 0.5);
+        position: absolute;
+    }
+    /* Updated Black Key Positions (Tablet) */
+    .piano-key[data-key="w"] { left: 6%; }
+    .piano-key[data-key="e"] { left: 14%; }
+    .piano-key[data-key="t"] { left: 31%; }
+    .piano-key[data-key="y"] { left: 39%; }
+    .piano-key[data-key="u"] { left: 48%; }
+    .piano-key[data-key="o"] { left: 65%; }
+    .piano-key[data-key="p"] { left: 73%; }
+    .piano-key[data-key="]"] { left: 90%; }
+}
+
+/* Responsive Styles for Big-size Mobile Devices */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 20px; 
+    }
+    p {
+        font-size: 10px; 
+    }
+    #keyboard {
+        width: 100%;
+        max-height: 312px;
+        max-width: 500px;
+        position: relative;
+    }
+    .piano-key.white {
+        display: inline-flex;
+        width: calc(100% / 13.5);
+        height: 310px;
+        padding-bottom: calc((100% / 13) * 3.95);
+        vertical-align: bottom;
+        position: relative;
+        font-size: 14px;
+    }
+    .piano-key.black {
+        display: flex;
+        height: 310px;  /* Adjust if needed */
+    }
+}
+
+/* Responsive Styles for Med-size Mobile Devices */
+@media (max-width: 535px) {
+    #keyboard {
+        width: 100%;
+        max-height: 272px;
+        max-width: 400px;
+        position: relative;
+    }
+    .piano-key.white {
+        display: inline-flex;
+        height: 270px;
+        width: calc(100% / 13.95);
+        padding-bottom: calc((100% / 13) * 3.95);
+        vertical-align: bottom;
+        position: relative;
+    }
+    .piano-key.black {
+        display: flex;
+        height: 180px;
+    }
+}
+
+/* Responsive Styles for Small-size Mobile Devices */
+@media (max-width: 435px) {
+    #keyboard {
+        width: 100%;
+        max-height: 212px;
+        max-width: 300px;
+        font-size: 16px;
+        position: relative;
+    }
+    .piano-key.white {
+        display: inline-flex;
+        height: 210px;
+        width: calc(100% / 14.73);
+        padding-bottom: calc((100% / 13) * 3.95);
+        vertical-align: bottom;
+        position: relative;
+    }
+    .piano-key.black {
+        display: flex;
+        height: 140px;
+    }
+    .piano-key[data-key="w"] { left: 5.3%; }
+}
+
+/* Responsive Styles for Extra-small-size Mobile Devices */
+@media (max-width: 345px) {
+    h1 {
+        font-size: 16px; 
+    }
+    p {
+        font-size: 8px; 
+    }
+    #keyboard {
+        width: 100%;
+        max-height: 212px;
+        max-width: 250px;
+        font-size: 16px;
+        position: relative;
+    }
+    .piano-key.white {
+        display: inline-flex;
+        height: 210px;
+        width: calc(100% / 15.38);
+        padding-bottom: calc((100% / 13) * 3.95);
+        vertical-align: bottom;
+        position: relative;
+    }
+    .piano-key.black {
+        display: flex;
+        height: 140px;
+    }
+    .piano-key[data-key="w"] { left: 5.3%; }
+}
